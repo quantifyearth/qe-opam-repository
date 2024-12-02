@@ -1,0 +1,53 @@
+opam-version: "2.0"
+synopsis: "Irmin backend which stores values in a pack file"
+maintainer: "thomas@gazagnaire.org"
+authors: "Thomas Gazagnaire"
+license: "ISC"
+homepage: "https://github.com/mirage/irmin"
+bug-reports: "https://github.com/mirage/irmin/issues"
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune" {>= "3.5.0"}
+  "irmin" {= version}
+  "ppx_irmin" {= version}
+  "index" {= "dev"}
+  "fmt"
+  "logs"
+  "eio" {>= "1.0"}
+  "mtime" {>= "2.0.0"}
+  "cmdliner"
+  "optint" {>= "0.1.0"}
+  "checkseum"
+  "rusage"
+  "progress" {= "dev"}
+  "irmin-test" {with-test & = version}
+  "astring" {with-test}
+  "alcotest" {with-test}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+dev-repo: "git+https://github.com/mirage/irmin.git"
+pin-depends: [
+  [
+    "terminal.dev"
+    "git+https://github.com/craigfe/progress#ac53cd48cd82500f51faf67f9555a9454d5f5504"
+  ]
+  [
+    "progress.dev"
+    "git+https://github.com/craigfe/progress#ac53cd48cd82500f51faf67f9555a9454d5f5504"
+  ]
+  [
+    "index.dev"
+    "git+https://github.com/mirage/index#09ab315dcfe6c1affbbb01c737f1b8e235b04eca"
+  ]
+]
+url {
+  src: "https://github.com/mirage/irmin/archive/heads/eio.tar.gz"
+  checksum: [
+    "md5=8f786632e51147109b09d18d01a0a96c"
+    "sha512=35dd6018477276161d8903133d9a9fe27c4fc92c29cd248a009a2d8de81849da2ada1f5c73f0692abba0b6f65b263c24b906fc671fdf030760963046b6431ef3"
+  ]
+}

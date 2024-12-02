@@ -1,0 +1,52 @@
+opam-version: "2.0"
+synopsis: "Git backend for Irmin"
+description: """\
+`Irmin_git` expose a bi-directional bridge between Git repositories and
+Irmin stores."""
+maintainer: "thomas@gazagnaire.org"
+authors: ["Thomas Gazagnaire" "Thomas Leonard"]
+license: "ISC"
+homepage: "https://github.com/mirage/irmin"
+doc: "https://mirage.github.io/irmin/"
+bug-reports: "https://github.com/mirage/irmin/issues"
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune" {>= "3.5.0"}
+  "irmin" {= version}
+  "ppx_irmin" {= version}
+  "git" {>= "3.14.0"}
+  "git-unix" {>= "3.14.0"}
+  "digestif" {>= "0.9.0"}
+  "cstruct"
+  "fmt"
+  "astring"
+  "cohttp-lwt-unix"
+  "fpath"
+  "logs"
+  "lwt" {>= "5.3.0"}
+  "lwt_eio" {>= "0.5"}
+  "uri"
+  "mimic"
+  "irmin-test" {with-test & = version}
+  "mtime" {with-test & >= "2.0.0"}
+  "alcotest" {with-test}
+  "irmin-watcher" {= "dev"}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs]
+    {with-test & arch != "arm32" & arch != "x86_32"}
+]
+dev-repo: "git+https://github.com/mirage/irmin.git"
+pin-depends: [
+  "irmin-watcher.dev"
+  "git+https://github.com/patricoferris/irmin-watcher#d0e92b4ba5631b5f4dc0f3c00d97e79542dba45d"
+]
+url {
+  src: "https://github.com/mirage/irmin/archive/heads/eio.tar.gz"
+  checksum: [
+    "md5=8f786632e51147109b09d18d01a0a96c"
+    "sha512=35dd6018477276161d8903133d9a9fe27c4fc92c29cd248a009a2d8de81849da2ada1f5c73f0692abba0b6f65b263c24b906fc671fdf030760963046b6431ef3"
+  ]
+}
