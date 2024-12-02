@@ -1,0 +1,39 @@
+opam-version: "2.0"
+synopsis: "Detect operating system, distro and version information"
+description: """\
+This library is used to detect local information about 
+which operating system, architecture, distribution and
+version the program is running under."""
+maintainer: "anil@recoil.org"
+authors: "Anil Madhavapeddy <anil@recoil.org>"
+license: "ISC"
+homepage: "https://github.com/avsm/osrelease"
+bug-reports: "https://github.com/avsm/osrelease/issues"
+depends: [
+  "dune" {>= "2.3"}
+  "ocaml" {>= "4.06.0"}
+  "bos"
+  "astring"
+]
+build: [
+  ["dune" "subst"] {pinned}
+  [
+    "dune"
+    "build"
+    "-p"
+    name
+    "-j"
+    jobs
+    "@install"
+    "@runtest" {with-test}
+    "@doc" {with-doc}
+  ]
+]
+dev-repo: "git+https://github.com/avsm/osrelease.git"
+url {
+  src: "https://github.com/avsm/osrelease/archive/heads/master.tar.gz"
+  checksum: [
+    "md5=e4bb707d5d5d0bd9b354194ec8b93369"
+    "sha512=9adb170f4ccae357dd21c49704c9ccf5bd222f9b226e012e76cd647ec1afde2615d28bd902c3f76e3283ae89145ba9856af0d26846f31f6962ce361fb9a884ac"
+  ]
+}
