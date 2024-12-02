@@ -1,0 +1,47 @@
+opam-version: "2.0"
+synopsis: "Tools to manage OCI and Docker images"
+maintainer: "Thomas Gazagnaire <thomas@gazagnaire.org>"
+authors: "Thomas Gazagnaire <thomas@gazagnaire.org>"
+license: "ISC"
+homepage: "https://github.com/samoht/sweet"
+bug-reports: "https://github.com/samoht/sweet/issues"
+depends: [
+  "ocaml" {>= "5.00.0"}
+  "dune" {>= "3.8.0"}
+  "yojson"
+  "ca-certs"
+  "ppx_deriving_yojson"
+  "digestif"
+  "decompress"
+  "base64"
+  "cmdliner"
+  "logs"
+  "astring"
+  "dune-build-info"
+  "mirage-crypto-rng-eio"
+  "cohttp" {>= "6.0.0"}
+  "cohttp-eio" {>= "6.0.0"}
+  "progress"
+  "tls-eio"
+  "eio" {>= "1.2"}
+  "tar-eio"
+  "eio_main"
+  "xdg"
+  "printbox"
+  "printbox-text"
+  "osrelease"
+  "alcotest" {with-test}
+]
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+url {
+  src:
+    "https://github.com/quantifyearth/container-image/archive/heads/shark.tar.gz"
+  checksum: [
+    "md5=c57955bb4cdad71db671361f9b13351c"
+    "sha512=5c19528463c6f47649e516d573fd3b6af5576408e9c7a167f6ae615a623a9fdfed79405c4a3aec4e4c2a65e56b07a8a64aec2ed8b5c3da4aef75325ae7911e5d"
+  ]
+}
