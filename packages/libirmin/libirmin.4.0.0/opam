@@ -1,0 +1,31 @@
+opam-version: "2.0"
+synopsis: "C bindings for irmin"
+description: "C bindings for irmin using Ctypes inverted stubs"
+maintainer: "zachshipko@gmail.com"
+authors: "Zach Shipko"
+license: "ISC"
+homepage: "https://github.com/mirage/irmin"
+bug-reports: "https://github.com/mirage/irmin/issues"
+depends: [
+  "dune" {>= "3.5.0"}
+  "ctypes" {>= "0.19"}
+  "ctypes-foreign" {>= "0.18"}
+  "irmin" {= version}
+  "irmin-cli" {= version}
+  "eio_main" {>= "1.0"}
+  "lwt_eio" {>= "0.5"}
+]
+available: arch != "arm64" & arch != "s390x" & os != "macos"
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+dev-repo: "git+https://github.com/mirage/irmin.git"
+url {
+  src: "https://github.com/mirage/irmin/archive/heads/eio.tar.gz"
+  checksum: [
+    "md5=8f786632e51147109b09d18d01a0a96c"
+    "sha512=35dd6018477276161d8903133d9a9fe27c4fc92c29cd248a009a2d8de81849da2ada1f5c73f0692abba0b6f65b263c24b906fc671fdf030760963046b6431ef3"
+  ]
+}

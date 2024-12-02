@@ -1,0 +1,43 @@
+opam-version: "2.0"
+synopsis: "Utils for Irmin-pack"
+description: """\
+`Irmin-pack-tools` defines useful binaries and libraries for
+an internal use of irmin-pack, like dumping control files in
+a readable json format and such."""
+maintainer: "Gwenaelle@tarides.com"
+authors: "Gwenaëlle Lecat"
+license: "ISC"
+homepage: "https://github.com/mirage/irmin"
+doc: "https://mirage.github.io/irmin/"
+bug-reports: "https://github.com/mirage/irmin/issues"
+depends: [
+  "ocaml" {>= "5.1.0"}
+  "dune" {>= "3.5.0"}
+  "irmin-tezos" {= version}
+  "irmin-pack" {= version}
+  "irmin-pack" {= version}
+  "index" {>= "1.6.2"}
+  "cmdliner" {>= "1.1.0"}
+  "cmdliner" {>= "1.1.0"}
+  "notty" {>= "0.2.3"}
+  "index" {>= "dev"}
+  "ppx_repr" {>= "0.7.0"}
+  "ptime"
+  "hex"
+  "irmin-test" {with-test & = version}
+  "alcotest" {with-test}
+]
+available: arch != "arm32" & arch != "x86_32"
+build: [
+  ["dune" "subst"] {dev}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
+]
+dev-repo: "git+https://github.com/mirage/irmin.git"
+url {
+  src: "https://github.com/mirage/irmin/archive/heads/eio.tar.gz"
+  checksum: [
+    "md5=8f786632e51147109b09d18d01a0a96c"
+    "sha512=35dd6018477276161d8903133d9a9fe27c4fc92c29cd248a009a2d8de81849da2ada1f5c73f0692abba0b6f65b263c24b906fc671fdf030760963046b6431ef3"
+  ]
+}
